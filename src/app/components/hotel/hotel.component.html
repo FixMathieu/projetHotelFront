@@ -1,0 +1,121 @@
+<div class="container mt-5">
+    <h2>{{ title }}</h2>
+    <form [formGroup]="myForm" (ngSubmit)="onSaveHotel(myForm)">
+      <div class="row">
+        <div class="mb-3 col-md-8">
+          <input
+            type="hidden"
+            class="form-control"
+            id="id"
+            formControlName="id"
+          />
+        </div>
+        <div class="mb-3 col-md-8">
+          <label for="hotelName" class="form-label">Nom de l'hotel'</label>
+          <input
+            type="text"
+            class="form-control"
+            id="hotelName"
+            formControlName="name"
+          />
+          <span class="text-danger" *ngIf="myForm.get('name')?.errors"
+          >Nom manquant</span>
+        </div>
+        <div class="mb-3 col-md-4">
+          <label for="hotelName" class="form-label">Prix</label>
+          <input
+            type="number"
+            class="form-control"
+            id="hotelName"
+            min="1"
+            formControlName="price"
+          />
+          <span class="text-danger" *ngIf="myForm.get('price')?.errors"
+          >Prix non renseigné</span>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="hotelName" class="form-label">address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="hotelName"
+          formControlName="address"
+        />
+        <span class="text-danger" *ngIf="myForm.get('address')?.errors"
+        >Adresse manquante</span>
+      </div>
+      <div class="mb-3">
+        <label for="hotelName" class="form-label">téléphone</label>
+        <input
+          type="text"
+          class="form-control"
+          id="hotelName"
+          formControlName="phone"
+        />
+        <span class="text-danger" *ngIf="myForm.get('phone')?.errors"
+        >Téléphone manquant</span>
+      </div>
+      <div class="mb-3">
+        <label for="hotelName" class="form-label">Etoile(s)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="hotelName"
+          formControlName="star"
+        />
+        <span class="text-danger" *ngIf="myForm.get('star')?.errors"
+        >Etoile manquante</span>
+      </div>
+      <div class="mb-3">
+        <label for="hotelName" class="form-label">Nombre de chambre</label>
+        <input
+          type="number"
+          class="form-control"
+          id="hotelName"
+          formControlName="nbrRoom"
+        />
+        <span class="text-danger" *ngIf="myForm.get('nbrRoom')?.errors"
+        >Nombre de chambre manquante</span>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="city" class="form-label">Ville</label>
+          <select class="form-select" formControlName="city">
+            <option [ngValue]="null" disabled>Choississez la ville</option>
+            <option *ngFor="let cit of cities" [ngValue]="cit.id">
+              {{ cit.name }}
+            </option>
+          </select>
+          <span class="text-danger" *ngIf="myForm.get('city')?.errors"
+          >Catégorie non selectionnée</span>
+        </div>
+        <div class="mb-3 col-md-4">
+          <div>
+           <label for="image" class="form-label">Image</label><br />
+            <input
+              type="file"
+              class="form-control-file"
+              id="image"
+              (change)="onFileChanged($event)"
+            /><br/>
+            <img
+            
+              *ngIf="hotel != null"
+              [src]="url + hotel.id"
+              style="height: 90px; width: fil-content"
+  
+            /><br/>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="!status" type="submit" class="btn btn-primary">
+        Ajouter
+      </button>
+      <button *ngIf="status" type="submit" class="btn btn-primary">
+        Mise à jour
+      </button>
+      <div class="text-danger">{{ error }}</div>
+    </form>
+  </div>
+  

@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3 mb-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">HOTELS</a>
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="/hotels">hotels</a>
+      </li>
+      
+      <li class="nav-item" *ngIf="hasRoleAdmin == true">
+        <a class="nav-link active" routerLink="/admin">Panel Admin</a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn != true; else logoutBtn">
+        <a class="nav-link active" routerLink="/login">Se connecter</a>
+      </li>
+      <ng-template #logoutBtn>
+        <li class="nav-item">
+          <button class="btn btn-danger" (click)="logout()">
+            Se déconnecter
+          </button>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>
+
+<div class="container my-5" *ngIf="isLoggedIn == true">
+  <strong>Bonjour <span class="text-danger">{{username}}</span>, vous êtes bien connecté. </strong>
+</div>
+
+<router-outlet></router-outlet>
